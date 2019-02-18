@@ -4,11 +4,11 @@ type: guide
 order: 101
 ---
 
-> Nếu như bạn mới bắt đầu với component bạn có thể bắt đầu với [cơ bản về components](components.html).
+> Nếu như bạn mới bắt đầu với component bạn có thể bắt đầu từ [cơ bản về components](components.html).
 
 ## Tên Component
 
-Component được đặt tên khi đăng kí. Ví dụ khi đăng kí component toàn cục, ta thường thấy:
+Component được đặt tên khi đăng kí. Ví dụ khi đăng kí component toàn cục, ta thường thấy cú pháp:
 
 ```js
 Vue.component('component-todo', { /* ... */ })
@@ -16,13 +16,13 @@ Vue.component('component-todo', { /* ... */ })
 
 Tên của component là biến đầu tiên của `Vue.component`.
 
-Tên của component được theo mục đích sử dụng. Khi sử dụng trực tiếp component trên DOM (trái ngược với trong chuỗi template hay [component trong một file](single-file-components.html)), chúng tôi khuyến khích tuân thủ theo [luật của W3C](https://www.w3.org/TR/custom-elements/#concepts) để đặt tên cho các thẻ (viết thường và phải nối bằng gach ngang). Điều này sẽ giúp tránh khỏi nguy cơ xung đột với các HTML elements hiện tại cũng như trong tương lai.
+Tên của component được đặt theo mục đích sử dụng. Khi sử dụng trực tiếp component trên DOM (trái ngược với trong chuỗi template hay [component trong một file](single-file-components.html)), chúng tôi khuyến khích tuân thủ theo [luật của W3C](https://www.w3.org/TR/custom-elements/#concepts) để đặt tên cho các thẻ (viết thường và phải nối bằng gach ngang). Điều này sẽ giúp tránh khỏi nguy cơ xung đột với các HTML elements hiện tại cũng như trong tương lai.
 
 Bạn có thể xem những khuyến cáo khác cho việc đặt tên cho component tại [hướng dẫn](../style-guide/#Base-component-names-strongly-recommended).
 
-### Name Casing
+### Quy tắc đặt tên
 
-Bạn có hai lựa chọn khi đặt tên cho component:
+Bạn có hai lựa chọn khi đặt tên cho một component:
 
 #### Với kebab-case
 
@@ -38,7 +38,7 @@ Khi định nghĩa một component theo kiểu kebab-case, bạn cũng phải s�
 Vue.component('MyComponentName', { /* ... */ })
 ```
 
-Khi định nghĩa một component với kiểu PascalCase, có thể sử dụng cả hai cách để tạo tham chiếu tới element của nó. Điều này có nghĩa là cả hai cách viết `<my-component-name>` và `<MyComponentName>` đểu được chấp nhận. Tuy nhiên, cần chú ý là chỉ có những tên của component với kebab-case mới sử dụng được trên DOM (ví dụ trên file templates)
+Khi định nghĩa một component với kiểu PascalCase, có thể sử dụng cả hai cách để tạo tham chiếu tới element của nó. Điều này có nghĩa là cả hai cách viết `<my-component-name>` và `<MyComponentName>` đều được chấp nhận. Tuy nhiên, cần chú ý là chỉ có những tên của component với kebab-case mới sử dụng được trên DOM (ví dụ trên file templates)
 
 ## Đăng kí component toàn cục
 
