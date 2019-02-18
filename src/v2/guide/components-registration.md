@@ -1,48 +1,48 @@
 ---
-title: Component Registration
+title: Đăng kí Component
 type: guide
 order: 101
 ---
 
-> This page assumes you've already read the [Components Basics](components.html). Read that first if you are new to components.
+> Nếu như bạn mới bắt đầu với component bạn có thể bắt đầu với [cơ bản về components](components.html).
 
-## Component Names
+## Tên Component
 
-When registering a component, it will always be given a name. For example, in the global registration we've seen so far:
+Component được đặt tên khi đăng kí. Ví dụ khi đăng kí component toàn cục, ta thường thấy:
 
 ```js
-Vue.component('my-component-name', { /* ... */ })
+Vue.component('component-todo', { /* ... */ })
 ```
 
-The component's name is the first argument of `Vue.component`.
+Tên của component là biến đầu tiên của `Vue.component`.
 
-The name you give a component may depend on where you intend to use it. When using a component directly in the DOM (as opposed to in a string template or [single-file component](single-file-components.html)), we strongly recommend following the [W3C rules](https://www.w3.org/TR/custom-elements/#concepts) for custom tag names (all-lowercase, must contain a hyphen). This helps you avoid conflicts with current and future HTML elements.
+Tên của component được theo mục đích sử dụng. Khi sử dụng trực tiếp component trên DOM (trái ngược với trong chuỗi template hay [component trong một file](single-file-components.html)), chúng tôi khuyến khích tuân thủ theo [luật của W3C](https://www.w3.org/TR/custom-elements/#concepts) để đặt tên cho các thẻ (viết thường và phải nối bằng gach ngang). Điều này sẽ giúp tránh khỏi nguy cơ xung đột với các HTML elements hiện tại cũng như trong tương lai.
 
-You can see other recommendations for component names in the [Style Guide](../style-guide/#Base-component-names-strongly-recommended).
+Bạn có thể xem những khuyến cáo khác cho việc đặt tên cho component tại [hướng dẫn](../style-guide/#Base-component-names-strongly-recommended).
 
 ### Name Casing
 
-You have two options when defining component names:
+Bạn có hai lựa chọn khi đặt tên cho component:
 
-#### With kebab-case
+#### Với kebab-case
 
 ```js
 Vue.component('my-component-name', { /* ... */ })
 ```
 
-When defining a component with kebab-case, you must also use kebab-case when referencing its custom element, such as in `<my-component-name>`.
+Khi định nghĩa một component theo kiểu kebab-case, bạn cũng phải sử dụng kebab-case khi tham chiếu đến element của nó, giống như `<my-component-name>`.
 
-#### With PascalCase
+#### Với PascalCase
 
 ```js
 Vue.component('MyComponentName', { /* ... */ })
 ```
 
-When defining a component with PascalCase, you can use either case when referencing its custom element. That means both `<my-component-name>` and `<MyComponentName>` are acceptable. Note, however, that only kebab-case names are valid directly in the DOM (i.e. non-string templates).
+Khi định nghĩa một component với kiểu PascalCase, có thể sử dụng cả hai cách để tạo tham chiếu tới element của nó. Điều này có nghĩa là cả hai cách viết `<my-component-name>` và `<MyComponentName>` đểu được chấp nhận. Tuy nhiên, cần chú ý là chỉ có những tên của component với kebab-case mới sử dụng được trên DOM (ví dụ trên file templates)
 
-## Global Registration
+## Đăng kí component toàn cục
 
-So far, we've only created components using `Vue.component`:
+Cho tới nay, chúng ta chỉ tạo ra những component sử dụng cú pháp `Vue.component`:
 
 ```js
 Vue.component('my-component-name', {
@@ -50,7 +50,7 @@ Vue.component('my-component-name', {
 })
 ```
 
-These components are **globally registered**. That means they can be used in the template of any root Vue instance (`new Vue`) created after registration. For example:
+Những component này được **đăng kí toàn cục**. Nó có nghĩa rằng component có thể sử dụng trong template của bất cứ root Vue instance (`new Vue`) sau khi được đăng kí. Ví dụ:
 
 ```js
 Vue.component('component-a', { /* ... */ })
@@ -68,13 +68,13 @@ new Vue({ el: '#app' })
 </div>
 ```
 
-This even applies to all subcomponents, meaning all three of these components will also be available _inside each other_.
+Điều này còn áp dụng cho tất cả những subcomponents, nghĩa là tất cả ba component trên sẽ sẵn sàng để sử dụng _ngay bên trong chúng_.
 
-## Local Registration
+## Đăng kí component cục bộ
 
-Global registration often isn't ideal. For example, if you're using a build system like Webpack, globally registering all components means that even if you stop using a component, it could still be included in your final build. This unnecessarily increases the amount of JavaScript your users have to download.
+Việc đăng kí component toàn cục thường không phải là một biện pháp lí tưởng. Ví dụ, nếu bạn sử dụng hệ thống xây dựng hệ thống như Webpack, đăng kí toàn cục tất cả các component có nghĩa là kể cả bạn không sử dụng một component nữa, nó vẫn có thể được thêm vào bản build cuối cùng. Nó không cần thiết và làm gia tăng khối lượng của JavaScript mà người dùng cần phải tải.
 
-In these cases, you can define your components as plain JavaScript objects:
+Trong những trường hợp này, bạn có thể định nghĩa component như là những JavaScript objects:
 
 ```js
 var ComponentA = { /* ... */ }
@@ -82,7 +82,7 @@ var ComponentB = { /* ... */ }
 var ComponentC = { /* ... */ }
 ```
 
-Then define the components you'd like to use in a `components` option:
+Sau khi định nghĩa các component, bạn có thể sử dụng trong `components` option:
 
 ```js
 new Vue({
@@ -94,9 +94,9 @@ new Vue({
 })
 ```
 
-For each property in the `components` object, the key will be the name of the custom element, while the value will contain the options object for the component.
+Cho mỗi thuộc tính trong đối tượng component, key sẽ là tên cuả custom element, trong khi giá trị sẽ bao gồm tuỳ chọn của đối tượng cho component.
 
-Note that **locally registered components are _not_ also available in subcomponents**. For example, if you wanted `ComponentA` to be available in `ComponentB`, you'd have to use:
+Chú ý rằng **component được đăng kí cục bộ sẽ _không_ sẵn sàng để sử dụng trong các subcomponents**. Ví dụ, nếu như bạn muốn sử dụng `ComponentA` trong `ComponentB`, bạn phải sử dụng:
 
 ```js
 var ComponentA = { /* ... */ }
@@ -109,7 +109,7 @@ var ComponentB = {
 }
 ```
 
-Or if you're using ES2015 modules, such as through Babel and Webpack, that might look more like:
+Hoặc nếu bạn sử dụng ES2015 modules, như là Babel hay Webpack, cú pháp có thể giống như sau:
 
 ```js
 import ComponentA from './ComponentA.vue'
@@ -122,20 +122,20 @@ export default {
 }
 ```
 
-Note that in ES2015+, placing a variable name like `ComponentA` inside an object is shorthand for `ComponentA: ComponentA`, meaning the name of the variable is both:
+Chú ý rằng trong ES2015+, đặt tên biến như `ComponentA` bên trong một object là viết tắt của `ComponentA: ComponentA`, trường hợp này tên của biến đồng thời là:
 
-- the custom element name to use in the template, and
-- the name of the variable containing the component options
+- Tên của custom element để sử dụng trong template, và
+- Tên của biến bao gồm các tuỳ chọn của component
 
-## Module Systems
+## Module hệ thống
 
-If you're not using a module system with `import`/`require`, you can probably skip this section for now. If you are, we have some special instructions and tips just for you.
+Nếu bạn không sử dụng module systems với `import`/`require`, bạn có thể bỏ qua mục này, nếu bạn có sử dụng thì chúng tôi có một vài hướng dẫn và lời khuyên cho bạn
 
-### Local Registration in a Module System
+### Đăng kí cục bố trong Module System
 
-If you're still here, then it's likely you're using a module system, such as with Babel and Webpack. In these cases, we recommend creating a `components`, with each component in its own file.
+Nếu bạn sử dụng module system, giống như là Babel và Webpack. Trong trường hợp này, chúng tôi khuyến khích tạo ra môt `components`, với mỗi component có một file riêng.
 
-Then you'll need to import each component you'd like to use, before you locally register it. For example, in a hypothetical `ComponentB.js` or `ComponentB.vue` file:
+Và bạn sẽ cần phải import từng component mà bạn muốn sử dụng, trước khi bạn đăng kí cục bộ. Ví dụ, giả thuyết trong file `ComponentB.js` hoặc `ComponentB.vue`:
 
 ```js
 import ComponentA from './ComponentA'
@@ -150,13 +150,13 @@ export default {
 }
 ```
 
-Now both `ComponentA` and `ComponentC` can be used inside `ComponentB`'s template.
+Cả hai `ComponentA` và `ComponentC` có thể sử dụng trong template của `ComponentB`.
 
-### Automatic Global Registration of Base Components
+### Tự động đăng kí toàn cục của những base component
 
-Many of your components will be relatively generic, possibly only wrapping an element like an input or a button. We sometimes refer to these as [base components](../style-guide/#Base-component-names-strongly-recommended) and they tend to be used very frequently across your components.
+Rất nhiều component sẽ được sử dụng chung, có thể chỉ là bao gồm một element như là một input hay một nút. CHúng ta đôi khi gọi chúng nhưng là một [base components](../style-guide/#Base-component-names-strongly-recommended) và chúng sẽ được sử dụng thường xuyên giữa các component.
 
-The result is that many components may include long lists of base components:
+Kết quả là có nhiều component có thể bao gồm một danh sách dài các base components:
 
 ```js
 import BaseButton from './BaseButton.vue'
@@ -172,19 +172,18 @@ export default {
 }
 ```
 
-Just to support relatively little markup in a template:
+Chỉ để hỗ trợ cho một vài markup trong template:
 
 ```html
-<BaseInput
-  v-model="searchText"
-  @keydown.enter="search"
-/>
-<BaseButton @click="search">
-  <BaseIcon name="search"/>
+<BaseInput 
+    v-model='searchText' 
+    @keydown.enter='search' />
+<BaseButton @click='search'>
+  <BaseIcon name='search' />
 </BaseButton>
 ```
 
-Fortunately, if you're using Webpack (or [Vue CLI 3+](https://github.com/vuejs/vue-cli), which uses Webpack internally), you can use `require.context` to globally register only these very common base components. Here's an example of the code you might use to globally import base components in your app's entry file (e.g. `src/main.js`):
+May thay, nếu bạn đang sử dụng Webpack (hoặc [Vue CLI 3+](https://github.com/vuejs/vue-cli), công cụ sử dụng Webpack), bạn có thể sử dụng `require.context` cho đăng kí toàn cục với những base component phổ biến. Một ví dụ cho thấy cách bạn có thể dùng để sử dụng thêm vào các base component toàn cục trong file bắt đầu của ứng dụng ( ví dụ: `src/main.js`)
 
 ```js
 import Vue from 'vue'
@@ -223,4 +222,4 @@ requireComponent.keys().forEach(fileName => {
 })
 ```
 
-Remember that **global registration must take place before the root Vue instance is created (with `new Vue`)**. [Here's an example](https://github.com/chrisvfritz/vue-enterprise-boilerplate/blob/master/src/components/_globals.js) of this pattern in a real project context.
+Nhớ rằng **đăng kí toàn cục phải sẵn sàng trước khi root Vue instance được tạo ra (with `new Vue`)**. [Đây là ví dụ](https://github.com/chrisvfritz/vue-enterprise-boilerplate/blob/master/src/components/_globals.js) trong một dự án thực tế.
