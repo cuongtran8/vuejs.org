@@ -14,11 +14,11 @@ Component được đặt tên khi đăng kí. Ví dụ khi đăng kí component
 Vue.component('component-todo', { /* ... */ })
 ```
 
-Tên của component là biến đầu tiên của `Vue.component`.
+Tên của component là đối số đầu tiên của `Vue.component`.
 
-Tên của component được đặt theo mục đích sử dụng. Khi sử dụng trực tiếp component trên DOM (trái ngược với trong chuỗi template hay [component trong một file](single-file-components.html)), chúng tôi khuyến khích tuân thủ theo [luật của W3C](https://www.w3.org/TR/custom-elements/#concepts) để đặt tên cho các thẻ (viết thường và phải nối bằng gach ngang). Điều này sẽ giúp tránh khỏi nguy cơ xung đột với các HTML elements hiện tại cũng như trong tương lai.
+Tên của component được đặt theo mục đích sử dụng. Khi sử dụng trực tiếp component trên DOM (trái ngược với trong chuỗi template hay [trong một file component](single-file-components.html)), chúng tôi khuyến khích tuân thủ theo [quy định của W3C](https://www.w3.org/TR/custom-elements/#concepts) để đặt tên cho các thẻ (viết thường và phải nối bằng gach ngang). Điều này sẽ giúp tránh khỏi nguy cơ xung đột với các HTML elements hiện tại cũng như trong tương lai.
 
-Bạn có thể xem những khuyến cáo khác cho việc đặt tên cho component tại [hướng dẫn](../style-guide/#Base-component-names-strongly-recommended).
+Bạn có thể xem những khuyến cáo khác cho việc đặt tên một component tại [hướng dẫn](../style-guide/#Base-component-names-strongly-recommended).
 
 ### Quy tắc đặt tên
 
@@ -68,11 +68,11 @@ new Vue({ el: '#app' })
 </div>
 ```
 
-Điều này còn áp dụng cho tất cả những subcomponents, nghĩa là tất cả ba component trên sẽ sẵn sàng để sử dụng _ngay bên trong chúng_.
+Điều này còn áp dụng cho tất cả những components con, nghĩa là tất cả ba component trên sẽ sẵn sàng để sử dụng _ngay bên trong chúng_.
 
 ## Đăng kí component cục bộ
 
-Việc đăng kí component toàn cục thường không phải là một biện pháp lí tưởng. Ví dụ, nếu bạn sử dụng hệ thống xây dựng hệ thống như Webpack, đăng kí toàn cục tất cả các component có nghĩa là kể cả bạn không sử dụng một component nữa, nó vẫn có thể được thêm vào bản build cuối cùng. Nó không cần thiết và làm gia tăng khối lượng của JavaScript mà người dùng cần phải tải.
+Việc đăng kí component toàn cục thường không phải là một biện pháp lí tưởng. Ví dụ, nếu bạn sử dụng hệ thống xây dựng hệ thống như Webpack, đăng kí toàn cục cho tất cả các component có nghĩa là kể cả bạn không sử dụng một component nữa, nó vẫn có thể được thêm vào bản build cuối cùng. Nó không cần thiết và làm gia tăng khối lượng của JavaScript mà người dùng cần phải tải xuống.
 
 Trong những trường hợp này, bạn có thể định nghĩa component như là những JavaScript objects:
 
@@ -82,7 +82,7 @@ var ComponentB = { /* ... */ }
 var ComponentC = { /* ... */ }
 ```
 
-Sau khi định nghĩa các component, bạn có thể sử dụng trong `components` option:
+Sau khi định nghĩa các component, bạn có thể sử dụng trong tuỳ chọn `components`:
 
 ```js
 new Vue({
@@ -96,7 +96,7 @@ new Vue({
 
 Cho mỗi thuộc tính trong đối tượng component, key sẽ là tên cuả custom element, trong khi giá trị sẽ bao gồm tuỳ chọn của đối tượng cho component.
 
-Chú ý rằng **component được đăng kí cục bộ sẽ _không_ sẵn sàng để sử dụng trong các subcomponents**. Ví dụ, nếu như bạn muốn sử dụng `ComponentA` trong `ComponentB`, bạn phải sử dụng:
+Chú ý rằng **component được đăng kí cục bộ sẽ _không_ sẵn sàng để sử dụng trong các subcomponents**. Ví dụ, nếu như bạn muốn sử dụng `ComponentA` trong `ComponentB`, bạn phải sử dụng như sau:
 
 ```js
 var ComponentA = { /* ... */ }
@@ -131,7 +131,7 @@ Chú ý rằng trong ES2015+, đặt tên biến như `ComponentA` bên trong m�
 
 Nếu bạn không sử dụng module systems với `import`/`require`, bạn có thể bỏ qua mục này, nếu bạn có sử dụng thì chúng tôi có một vài hướng dẫn và lời khuyên cho bạn
 
-### Đăng kí cục bố trong Module System
+### Đăng kí component cục bộ trong Module System
 
 Nếu bạn sử dụng module system, giống như là Babel và Webpack. Trong trường hợp này, chúng tôi khuyến khích tạo ra môt `components`, với mỗi component có một file riêng.
 
@@ -222,4 +222,4 @@ requireComponent.keys().forEach(fileName => {
 })
 ```
 
-Nhớ rằng **đăng kí toàn cục phải sẵn sàng trước khi root Vue instance được tạo ra (with `new Vue`)**. [Đây là ví dụ](https://github.com/chrisvfritz/vue-enterprise-boilerplate/blob/master/src/components/_globals.js) trong một dự án thực tế.
+Nhớ rằng **đăng kí component toàn cục phải sẵn sàng trước khi root Vue instance được tạo ra (with `new Vue`)**. [Đây là ví dụ](https://github.com/chrisvfritz/vue-enterprise-boilerplate/blob/master/src/components/_globals.js) trong một dự án thực tế.
