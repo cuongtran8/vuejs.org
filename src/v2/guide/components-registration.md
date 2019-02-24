@@ -4,7 +4,7 @@ type: guide
 order: 101
 ---
 
-> Nếu như bạn mới bắt đầu với component bạn có thể bắt đầu từ [cơ bản về components](components.html).
+> Nếu như bạn chưa làm quen với component bạn có thể bắt đầu từ [cơ bản về components](components.html).
 
 ## Tên Component
 
