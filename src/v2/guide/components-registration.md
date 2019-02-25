@@ -8,7 +8,7 @@ order: 101
 
 ## Tên Component
 
-Component được đặt tên khi đăng kí. Ví dụ khi đăng kí ở cấp toàn cục, ta thường thấy cú pháp:
+Component được đặt tên khi đăng kí. Ví dụ khi đăng kí component ở cấp toàn cục, ta thường thấy cú pháp:
 
 ```js
 Vue.component('my-component-name', { /* ... */ })
@@ -38,9 +38,9 @@ Khi định nghĩa một component theo kiểu kebab-case, bạn cũng phải s�
 Vue.component('MyComponentName', { /* ... */ })
 ```
 
-Khi định nghĩa một component với kiểu PascalCase, có thể sử dụng cả hai cách để tạo tham chiếu tới element của nó. Điều này có nghĩa là cả hai cách viết `<my-component-name>` và `<MyComponentName>` đều được chấp nhận. Tuy nhiên, cần chú ý là chỉ có những tên của component với kebab-case mới sử dụng được trên DOM (ví dụ trên file templates)
+Khi định nghĩa một component ở dạng PascalCase, bạn có thể sử dụng cả hai cách khi tham chiếu tới phần tử web của nó. Điều này có nghĩa là cả hai cách viết `<my-component-name>` và `<MyComponentName>` đều được chấp nhận. Tuy nhiên, cần chú ý là chỉ có các tên của component với kebab-case mới sử dụng được trên DOM (nghĩa là các template không phải dạng chuỗi)
 
-## Đăng kí component toàn cục
+## Đăng kí ở cấp toàn cục
 
 Cho tới nay, chúng ta mới tạo ra những component sử dụng cú pháp `Vue.component`:
 
@@ -72,9 +72,9 @@ new Vue({ el: '#app' })
 
 ## Đăng kí ở cấp cục bộ
 
-Việc đăng kí component toàn cục thường không phải là một biện pháp lí tưởng. Ví dụ, nếu bạn sử dụng hệ thống xây dựng hệ thống như Webpack, đăng kí toàn cục cho tất cả các component có nghĩa là kể cả bạn không sử dụng một component nữa, nó vẫn có thể được thêm vào bản build cuối cùng. Nó không cần thiết và làm gia tăng khối lượng của JavaScript mà người dùng cần phải tải xuống.
+ Đăng kí component toàn cục thường không phải là một biện pháp lí tưởng. Ví dụ, nếu bạn sử dụng một hệ thống xây dựng hệ thống xây dựng [build system]như Webpack, đăng kí toàn cục cho tất cả các component có nghĩa là kể cả khi bạn không sử dụng một component nữa, component đó vẫn có thể được thêm vào bản build cuối cùng. Điều này là không cần thiết và làm gia tăng khối lượng của JavaScript mà người dùng cần phải tải xuống.
 
-Trong những trường hợp này, bạn có thể định nghĩa component như là những JavaScript objects:
+Trong những trường hợp này, bạn có thể định nghĩa component dưới dạng object trong JavaScript:
 
 ```js
 var ComponentA = { /* ... */ }
@@ -82,7 +82,7 @@ var ComponentB = { /* ... */ }
 var ComponentC = { /* ... */ }
 ```
 
-Sau khi định nghĩa các component, bạn có thể sử dụng trong tuỳ chọn `components`:
+Sau khi khai báo các component, bạn muốn sử dụng trong tuỳ chọn `components`:
 
 ```js
 new Vue({
@@ -94,9 +94,9 @@ new Vue({
 })
 ```
 
-Cho mỗi thuộc tính trong đối tượng component, key sẽ là tên cuả custom element, trong khi giá trị sẽ bao gồm tuỳ chọn của đối tượng cho component.
+Đối với mỗi thuộc tính trong object component, khoá (key) sẽ trở thành tên cuả phần tử tuỳ biến (custom element), trong khi giá trị (value) sẽ bao gồm object `options` cho component.
 
-Chú ý rằng **component được đăng kí cục bộ sẽ _không_ sẵn sàng để sử dụng trong các subcomponents**. Ví dụ, nếu như bạn muốn sử dụng `ComponentA` trong `ComponentB`, bạn phải sử dụng như sau:
+Lưu ý rằng **bạn sẽ _không_ truy xuất được đến các component được đăng kí cục bộ từ các component con**. Ví dụ, nếu như bạn muốn sử dụng `ComponentA` trong `ComponentB`, bạn phải khai báo như sau:
 
 ```js
 var ComponentA = { /* ... */ }
@@ -109,7 +109,7 @@ var ComponentB = {
 }
 ```
 
-Hoặc nếu bạn sử dụng ES2015 modules, như là Babel hay Webpack, cú pháp có thể giống như sau:
+Hoặc nếu bạn sử dụng module ES2015 (thông qua Babel hay Webpack):
 
 ```js
 import ComponentA from './ComponentA.vue'
@@ -122,20 +122,20 @@ export default {
 }
 ```
 
-Chú ý rằng trong ES2015+, đặt tên biến như `ComponentA` bên trong một object là viết tắt của `ComponentA: ComponentA`, trường hợp này tên của biến đồng thời là:
+Chú ý rằng trong ES2015+, đặt một tên biến như `ComponentA` bên trong một object là cách viết tắt của `ComponentA: ComponentA`, trường hợp này tên của biến đồng thời là:
 
-- Tên của custom element để sử dụng trong template, và
-- Tên của biến bao gồm các tuỳ chọn của component
+- tên của đối tượng tuỳ biến để sử dụng trong template, và
+- tên của biến bao gồm các tuỳ chọn cho component
 
 ## Hệ thống Module
 
-Nếu bạn không sử dụng module systems với `import`/`require`, bạn có thể bỏ qua mục này, nếu bạn có sử dụng thì chúng tôi có một vài hướng dẫn và lời khuyên cho bạn
+Nếu không sử dụng module systems với `import`/`require`, bạn có thể bỏ qua mục này, ngược lại thì chúng tôi có một vài hướng dẫn và lời khuyên cho bạn.
 
 ### Đăng kí ở cấp cục bộ trong hệ thống Module 
 
-Nếu bạn sử dụng module system, giống như là Babel và Webpack. Trong trường hợp này, chúng tôi khuyến khích tạo ra môt `components`, với mỗi component có một file riêng.
+Nếu vẫn còn đọc đến những dòng này thì khả năng cao là bạn đang sử dụng một hệ thống module như Babel và Webpack. Trong trường hợp này, chúng tôi khuyến khích tạo một file riêng cho mỗi component.
 
-Và bạn sẽ cần phải import từng component mà bạn muốn sử dụng, trước khi bạn đăng kí cục bộ. Ví dụ, giả thuyết trong file `ComponentB.js` hoặc `ComponentB.vue`:
+Và bạn sẽ cần phải nhập (`import`) từng component mà bạn muốn sử dụng trước khi đăng kí cục bộ. Ví dụ, trong một file `ComponentB.js` hoặc `ComponentB.vue`:
 
 ```js
 import ComponentA from './ComponentA'
@@ -150,13 +150,13 @@ export default {
 }
 ```
 
-Cả hai `ComponentA` và `ComponentC` có thể sử dụng trong template của `ComponentB`.
+Giờ thì bạn có thể sử dụng cả `ComponentA` và `ComponentC` trong template của `ComponentB`.
 
-### Tự động đăng kí toàn cục của những base component
+### Tự động đăng kí toàn cục của những component cơ sở
 
-Rất nhiều component sẽ được sử dụng chung, có thể chỉ là bao gồm một element như là một input hay một nút. CHúng ta đôi khi gọi chúng nhưng là một [base components](../style-guide/#Base-component-names-strongly-recommended) và chúng sẽ được sử dụng thường xuyên giữa các component.
+Bạn sẽ có nhiều component dùng chung, ví dụ một component dạng wrapper cho một phần tử như `button` hoặc `input`. Chúng tôi đôi khi gọi những component này là [component cơ sở](../style-guide/#Base-component-names-strongly-recommended) (base component), và những component cơ sở này có khuynh hướng được dùng rất thường xuyên bên trong các component khác.
 
-Kết quả là có nhiều component có thể bao gồm một danh sách dài các base components:
+Kết quả là nhiều component có thể có một danh sách component cơ sở khá dài:
 
 ```js
 import BaseButton from './BaseButton.vue'
@@ -172,7 +172,7 @@ export default {
 }
 ```
 
-Chỉ để hỗ trợ cho một vài markup trong template:
+Chỉ để hỗ trợ cho một chút markup trong template:
 
 ```html
 <BaseInput 
@@ -183,7 +183,7 @@ Chỉ để hỗ trợ cho một vài markup trong template:
 </BaseButton>
 ```
 
-May thay, nếu bạn đang sử dụng Webpack (hoặc [Vue CLI 3+](https://github.com/vuejs/vue-cli), công cụ sử dụng Webpack), bạn có thể sử dụng `require.context` cho đăng kí toàn cục với những base component phổ biến. Một ví dụ cho thấy cách bạn có thể dùng để sử dụng thêm vào các base component toàn cục trong file bắt đầu của ứng dụng ( ví dụ: `src/main.js`)
+May thay, sử dụng Webpack (hoặc [Vue CLI 3+](https://github.com/vuejs/vue-cli), công cụ sử dụng Webpack), bạn có thể đăng kí các component cơ sở thông dụng ở cấp toàn cục với `require.context`. Đây là một ví dụ về cách nhúng các component cơ sở ở cấp toàn cục component vào file bắt đầu của ứng dụng (ví dụ: `src/main.js`):
 
 ```js
 import Vue from 'vue'
@@ -191,32 +191,31 @@ import upperFirst from 'lodash/upperFirst'
 import camelCase from 'lodash/camelCase'
 
 const requireComponent = require.context(
-  // The relative path of the components folder
+  // Đường dẫn tương đối của thư mục component
   './components',
-  // Whether or not to look in subfolders
+  // đường dẫn tới thư mục con (nếu có)
   false,
-  // The regular expression used to match base component filenames
+  // định nghĩa dùng để tìm những tệp component cơ sở
   /Base[A-Z]\w+\.(vue|js)$/
 )
 
 requireComponent.keys().forEach(fileName => {
-  // Get component config
+  // Lấy cấu hình của component
   const componentConfig = requireComponent(fileName)
 
-  // Get PascalCase name of component
+  // Lấy tên của component dùng PascalCase
   const componentName = upperFirst(
     camelCase(
-      // Strip the leading `'./` and extension from the filename
+      // Tách phần đầu `'./` và phần mở rộng từ tên của tệp tin
       fileName.replace(/^\.\/(.*)\.\w+$/, '$1')
     )
   )
 
-  // Register component globally
+  // Khai báo component cấp toàn cục
   Vue.component(
     componentName,
-    // Look for the component options on `.default`, which will
-    // exist if the component was exported with `export default`,
-    // otherwise fall back to module's root.
+    // Tìm kiếm tuỳ biến của component trong cấu hình mặc định 
+    // nếu nó được gửi với `export default`, ngược lại module gốc sẽ được sử dụng.
     componentConfig.default || componentConfig
   )
 })
