@@ -4,14 +4,14 @@ type: guide
 order: 101
 ---
 
-> Nếu như bạn chưa làm quen với component bạn có thể bắt đầu từ [cơ bản về components](components.html).
+> Nếu như chưa làm quen với component bạn có thể bắt đầu từ phần [Cơ bản về component](components.html).
 
 ## Tên Component
 
-Component được đặt tên khi đăng kí. Ví dụ khi đăng kí component toàn cục, ta thường thấy cú pháp:
+Component được đặt tên khi đăng kí. Ví dụ khi đăng kí ở cấp toàn cục, ta thường thấy cú pháp:
 
 ```js
-Vue.component('component-todo', { /* ... */ })
+Vue.component('my-component-name', { /* ... */ })
 ```
 
 Tên của component là đối số đầu tiên của `Vue.component`.
@@ -24,7 +24,7 @@ Bạn có thể xem những khuyến cáo khác cho việc đặt tên một com
 
 Bạn có hai lựa chọn khi đặt tên cho một component:
 
-#### Với kebab-case
+#### Dùng kebab-case
 
 ```js
 Vue.component('my-component-name', { /* ... */ })
@@ -32,7 +32,7 @@ Vue.component('my-component-name', { /* ... */ })
 
 Khi định nghĩa một component theo kiểu kebab-case, bạn cũng phải sử dụng kebab-case khi tham chiếu đến element của nó, giống như `<my-component-name>`.
 
-#### Với PascalCase
+#### Dùng PascalCase
 
 ```js
 Vue.component('MyComponentName', { /* ... */ })
@@ -42,15 +42,15 @@ Khi định nghĩa một component với kiểu PascalCase, có thể sử dụn
 
 ## Đăng kí component toàn cục
 
-Cho tới nay, chúng ta chỉ tạo ra những component sử dụng cú pháp `Vue.component`:
+Cho tới nay, chúng ta mới tạo ra những component sử dụng cú pháp `Vue.component`:
 
 ```js
 Vue.component('my-component-name', {
-  // ... options ...
+  // ... các tuỳ biến ...
 })
 ```
 
-Những component này được **đăng kí toàn cục**. Nó có nghĩa rằng component có thể sử dụng trong template của bất cứ root Vue instance (`new Vue`) sau khi được đăng kí. Ví dụ:
+Những component này được **đăng kí ở cấp toàn cục**. Điều này có nghĩa là sau khi đăng kí, một component có thể sử dụng trong template của bất cứ đối tượng Vue gốc (`new Vue`) nào. Ví dụ:
 
 ```js
 Vue.component('component-a', { /* ... */ })
@@ -68,9 +68,9 @@ new Vue({ el: '#app' })
 </div>
 ```
 
-Điều này còn áp dụng cho tất cả những components con, nghĩa là tất cả ba component trên sẽ sẵn sàng để sử dụng _ngay bên trong chúng_.
+Điều này còn áp dụng cho tất cả những components con, tức là tất cả ba component trên đều có thể sử dụng _lẫn nhau_.
 
-## Đăng kí component cục bộ
+## Đăng kí ở cấp cục bộ
 
 Việc đăng kí component toàn cục thường không phải là một biện pháp lí tưởng. Ví dụ, nếu bạn sử dụng hệ thống xây dựng hệ thống như Webpack, đăng kí toàn cục cho tất cả các component có nghĩa là kể cả bạn không sử dụng một component nữa, nó vẫn có thể được thêm vào bản build cuối cùng. Nó không cần thiết và làm gia tăng khối lượng của JavaScript mà người dùng cần phải tải xuống.
 
@@ -127,11 +127,11 @@ Chú ý rằng trong ES2015+, đặt tên biến như `ComponentA` bên trong m�
 - Tên của custom element để sử dụng trong template, và
 - Tên của biến bao gồm các tuỳ chọn của component
 
-## Module hệ thống
+## Hệ thống Module
 
 Nếu bạn không sử dụng module systems với `import`/`require`, bạn có thể bỏ qua mục này, nếu bạn có sử dụng thì chúng tôi có một vài hướng dẫn và lời khuyên cho bạn
 
-### Đăng kí component cục bộ trong Module System
+### Đăng kí ở cấp cục bộ trong hệ thống Module 
 
 Nếu bạn sử dụng module system, giống như là Babel và Webpack. Trong trường hợp này, chúng tôi khuyến khích tạo ra môt `components`, với mỗi component có một file riêng.
 
@@ -222,4 +222,4 @@ requireComponent.keys().forEach(fileName => {
 })
 ```
 
-Nhớ rằng **đăng kí component toàn cục phải sẵn sàng trước khi root Vue instance được tạo ra (with `new Vue`)**. [Đây là ví dụ](https://github.com/chrisvfritz/vue-enterprise-boilerplate/blob/master/src/components/_globals.js) trong một dự án thực tế.
+Nhớ rằng **bạn phải đăng kí component cấp toàn cục trước khi khởi tạo đối tượng Vue gốc (`new Vue`)**. [Đây là một ví dụ](https://github.com/chrisvfritz/vue-enterprise-boilerplate/blob/master/src/components/_globals.js) trong một ngữ cảnh thực tế.
