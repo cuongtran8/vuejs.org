@@ -193,9 +193,9 @@ import camelCase from 'lodash/camelCase'
 const requireComponent = require.context(
   // Đường dẫn tương đối của thư mục component
   './components',
-  // đường dẫn tới thư mục con (nếu có)
+  // có tìm component trong các thư mục con hay không
   false,
-  // định nghĩa dùng để tìm những tệp component cơ sở
+  // regular expression để tìm các file component cơ sở
   /Base[A-Z]\w+\.(vue|js)$/
 )
 
@@ -206,7 +206,7 @@ requireComponent.keys().forEach(fileName => {
   // Lấy tên của component dùng PascalCase
   const componentName = upperFirst(
     camelCase(
-      // Tách phần đầu `'./` và phần mở rộng từ tên của tệp tin
+      // Bỏ phần đầu `'./` và đuôi file
       fileName.replace(/^\.\/(.*)\.\w+$/, '$1')
     )
   )
@@ -214,8 +214,9 @@ requireComponent.keys().forEach(fileName => {
   // Khai báo component cấp toàn cục
   Vue.component(
     componentName,
-    // Tìm kiếm tuỳ biến của component trong cấu hình mặc định 
-    // nếu nó được gửi với `export default`, ngược lại module gốc sẽ được sử dụng.
+    // Tìm kiếm các tùy chọn của component trong thuộc tính `.default`
+    // Thuộc tính này sẽ khả dụng nếu component sử dụng `export default`
+    // nếu không thì dùng chính `componentConfig`
     componentConfig.default || componentConfig
   )
 })
